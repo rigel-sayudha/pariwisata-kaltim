@@ -1,6 +1,6 @@
 # KaltimExplore
 
-Welcome to the **KaltimExplore** project! This is a web application designed to showcase tourism destinations, news, and bookings for the East Kalimantan. Uses Laravel Filament for the backend administration panel and Next.js / React for the frontend.
+Welcome to the **KaltimExplore** project! This is a web application designed to showcase tourism destinations, news, and bookings for the East Kalimantan region. It utilizes Laravel Filament for the backend administration panel and Next.js / React for the frontend user interface.
 
 ---
 
@@ -19,7 +19,7 @@ Welcome to the **KaltimExplore** project! This is a web application designed to 
 Follow these steps to set up the project on your local machine. This project utilizes separate Laravel and Frontend (JavaScript) stacks contained within this monorepo layout.
 
 ### Prerequisites
-Make sure you have the following installed:
+Ensure you have the following installed:
 * [PHP >= 8.2](https://www.php.net/)
 * [Composer](https://getcomposer.org/)
 * [Node.js & npm](https://nodejs.org/en) (latest LTS recommended)
@@ -72,31 +72,29 @@ cd pariwisata-kaltim
 
 ### Step 3: Frontend Setup (Next.js)
 
-Aplikasi frontend utama menggunakan Next.js dan berada di dalam direktori `frontend`.
+The main frontend application uses Next.js and is located in the `frontend` directory.
 
-1. **Jalankan melalui root**
-   Anda dapat menjalankan frontend langsung dari root direktori tanpa harus masuk ke folder `frontend`:
+1. **Running from Root (Shortcut):**
    ```bash
-   npm run frontend
+   npm run dev
    ```
-   *Halaman frontend (user) akan dapat diakses di: [http://localhost:3000](http://localhost:3000)*
-
+   *The frontend client will be accessible at: [http://localhost:3000](http://localhost:3000)*
 ---
 
-### Step 4: Menjalankan Aplikasi
+### Step 4: Running the Application
 
 1. **Backend (Laravel):**
-   Pastikan Anda berada di root direktori project dan jalankan:
+   Ensure you are in the root project directory and run:
    ```bash
    php artisan serve
    ```
-   *Backend (API) akan berjalan di: [http://127.0.0.1:8000](http://127.0.0.1:8000)*
+   *The Backend (API) will be running at: [http://127.0.0.1:8000](http://127.0.0.1:8000)*
 
 2. **Admin Panel:**
-   Panel admin (Filament) dapat diakses di: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+   The admin panel (Filament) can be accessed at: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 3. **Frontend (User):**
-   Pastikan server Next.js di folder `frontend` sudah berjalan (Step 3). Akses di: [http://localhost:3000](http://localhost:3000)
+   Ensure the Next.js server is running (from Step 3). Access it at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
