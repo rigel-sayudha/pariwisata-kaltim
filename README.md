@@ -70,37 +70,33 @@ cd pariwisata-kaltim
 
 ---
 
-### Step 3: Frontend Setup
+### Step 3: Frontend Setup (Next.js)
 
-The frontend might be built internally using server-side Laravel Blade & React combinations or an explicit frontend directory structure.
+Aplikasi frontend utama menggunakan Next.js dan berada di dalam direktori `frontend`.
 
-1. **Install Node Packages**
-   From the root folder (or within your frontend specific folder structure like `frontend/`), install the NPM packages:
+1. **Jalankan melalui root**
+   Anda dapat menjalankan frontend langsung dari root direktori tanpa harus masuk ke folder `frontend`:
    ```bash
-   npm install
-   # OR if your frontend package layer is strictly in a nested folder:
-   # cd frontend && npm install
+   npm run frontend
    ```
-
-2. **Build the Assets**
-   Compile frontend assets via Vite or your respective build tool:
-   ```bash
-   npm run build
-   # or to run watcher dynamically during development:
-   # npm run dev
-   ```
+   *Halaman frontend (user) akan dapat diakses di: [http://localhost:3000](http://localhost:3000)*
 
 ---
 
-### Step 4: Run the Application
+### Step 4: Menjalankan Aplikasi
 
-Start the local development server:
-```bash
-php artisan serve
-```
+1. **Backend (Laravel):**
+   Pastikan Anda berada di root direktori project dan jalankan:
+   ```bash
+   php artisan serve
+   ```
+   *Backend (API) akan berjalan di: [http://127.0.0.1:8000](http://127.0.0.1:8000)*
 
-* **Frontend Page**: Usually accessible via `http://127.0.0.1:8000` (or the frontend port if detached)
-* **Admin Panel**: Accessible via `http://127.0.0.1:8000/admin` (Default Filament path)
+2. **Admin Panel:**
+   Panel admin (Filament) dapat diakses di: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+
+3. **Frontend (User):**
+   Pastikan server Next.js di folder `frontend` sudah berjalan (Step 3). Akses di: [http://localhost:3000](http://localhost:3000)
 
 ---
 
