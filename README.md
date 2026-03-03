@@ -1,6 +1,7 @@
 # KaltimExplore
 
-Welcome to the **KaltimExplore** project! This is a web application designed to showcase tourism destinations, news, and bookings for the East Kalimantan region. It utilizes Laravel Filament for the backend administration panel and Next.js / React for the frontend user interface.
+Welcome to the **KaltimExplore** 
+This is a web application designed to showcase tourism destinations, news, and bookings for the East Borneo. It utilizes Laravel Filament for the backend administration panel and Next.js / React for the frontend user interface.
 
 ---
 
