@@ -7,10 +7,10 @@ This is a web application designed to showcase tourism destinations, news, and b
 
 ## 📸 Screencaptures
 
-### Frontend Client
+### User Pages
 ![Frontend Home Capture](https://via.placeholder.com/800x400?text=Frontend+Home+View)
 
-### Admin Panel (Filament)
+### Admin Panel
 ![Admin Dashboard Capture](https://via.placeholder.com/800x400?text=Admin+Dashboard+View)
 
 ---
