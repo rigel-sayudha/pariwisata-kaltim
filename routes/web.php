@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('/admin');
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('sliders', SliderController::class)->except(['show', 'edit', 'update']);
 });
