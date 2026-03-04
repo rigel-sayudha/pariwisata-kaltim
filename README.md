@@ -5,7 +5,7 @@ This is a web application designed to showcase tourism destinations, news, and b
 
 ---
 
-## 📸 Screencaptures
+## 📸 Captures
 
 ### User Pages
 ![Frontend Home Capture](https://via.placeholder.com/800x400?text=Frontend+Home+View)
