@@ -16,6 +16,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -27,9 +28,26 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('KaltimExplore')
+            ->databaseNotifications()
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->renderHook(
+                'panels::head.end',
+                fn (): HtmlString => new HtmlString('
+                    <style>
+                        /* Fix: Prevent stuck Livewire/Alpine loading overlay from blocking interaction */
+                        .fi-modal-close-overlay,
+                        [x-show="isLoading"],
+                        div[wire\:loading] {
+                            opacity: 0 !important;
+                            pointer-events: none !important;
+                            z-index: -1 !important;
+                        }
+                    </style>
+                '),
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

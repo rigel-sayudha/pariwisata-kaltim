@@ -78,11 +78,6 @@ class ContactMessageResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -97,6 +92,8 @@ class ContactMessageResource extends Resource
     {
         return [
             'index' => Pages\ListContactMessages::route('/'),
+            'create' => Pages\CreateContactMessage::route('/create'),
+            'edit' => Pages\EditContactMessage::route('/{record}/edit'),
         ];
     }
 }

@@ -11,6 +11,9 @@ use App\Models\News;
 use App\Models\SocialMedia;
 use App\Models\TourBooking;
 use App\Models\ContactMessage;
+use App\Models\FooterSetting;
+use App\Models\User;
+use Filament\Notifications\Notification;
 
 class FrontendController extends Controller
 {
@@ -56,7 +59,20 @@ class FrontendController extends Controller
         ]);
 
         $booking = TourBooking::create($validated);
+
+        Notification::make()
+            ->title('Pesanan Tour Baru')
+            ->body("{$booking->name} telah memesan tour untuk {$booking->participants} orang.")
+            ->success()
+            ->sendToDatabase(User::all());
+
         return response()->json(['message' => 'Pesanan berhasil dikirim', 'data' => $booking], 201);
+    }
+
+    public function footerSettings()
+    {
+        $settings = FooterSetting::getAllAsArray();
+        return response()->json($settings);
     }
 
     public function storeContact(Request $request)
@@ -69,6 +85,13 @@ class FrontendController extends Controller
         ]);
 
         $contact = ContactMessage::create($validated);
+
+        Notification::make()
+            ->title('Pesan Kontak Baru')
+            ->body("Pesan baru dari {$contact->name} dengan subjek: {$contact->subject}.")
+            ->info()
+            ->sendToDatabase(User::all());
+
         return response()->json(['message' => 'Pesan berhasil dikirim', 'data' => $contact], 201);
     }
 }

@@ -4,16 +4,16 @@ namespace App\Filament\Resources\ContactMessageResource\Pages;
 
 use App\Filament\Resources\ContactMessageResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\EditRecord;
 
-class ListContactMessages extends ListRecords
+class EditContactMessage extends EditRecord
 {
     protected static string $resource = ContactMessageResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 }

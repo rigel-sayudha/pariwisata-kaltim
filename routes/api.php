@@ -21,6 +21,7 @@ Route::get('/destinations', [FrontendController::class, 'destinations']);
 Route::get('/news', [FrontendController::class, 'news']);
 Route::get('/news/{slug}', [FrontendController::class, 'newsDetail']);
 Route::get('/social-media', [FrontendController::class, 'socialMedia']);
+Route::get('/footer-settings', [FrontendController::class, 'footerSettings']);
 
 Route::post('/tour-bookings', [FrontendController::class, 'storeBooking']);
 Route::post('/contact-messages', [FrontendController::class, 'storeContact']);

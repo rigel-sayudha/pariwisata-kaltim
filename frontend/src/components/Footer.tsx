@@ -7,6 +7,10 @@ export interface SocialMediaItem {
     icon: string;
 }
 
+interface FooterSettings {
+    [key: string]: string;
+}
+
 async function getSocialMedia() {
     try {
         const res = await fetch("http://127.0.0.1:8000/api/social-media", { next: { revalidate: 3600 } });
@@ -17,8 +21,32 @@ async function getSocialMedia() {
     }
 }
 
+async function getFooterSettings(): Promise<FooterSettings> {
+    try {
+        const res = await fetch("http://127.0.0.1:8000/api/footer-settings", { next: { revalidate: 3600 } });
+        if (!res.ok) return {};
+        return res.json() as Promise<FooterSettings>;
+    } catch (e) {
+        return {};
+    }
+}
+
+function parseLinks(settings: FooterSettings, prefix: string): { label: string; url: string }[] {
+    const links: { label: string; url: string }[] = [];
+    for (let i = 1; i <= 10; i++) {
+        const val = settings[`${prefix}_link_${i}`];
+        if (!val) break;
+        const [label, url] = val.split("|");
+        links.push({ label: label || "", url: url || "#" });
+    }
+    return links;
+}
+
 export default async function Footer() {
-    const socialMedia = await getSocialMedia();
+    const [socialMedia, settings] = await Promise.all([
+        getSocialMedia(),
+        getFooterSettings(),
+    ]);
 
     const IconMap: Record<string, any> = {
         'instagram': Instagram,
@@ -26,6 +54,39 @@ export default async function Footer() {
         'facebook': Facebook,
         'youtube': Youtube,
     };
+
+    // Parse settings with fallbacks
+    const brandName = settings.brand_name || "KaltimExplore";
+    const brandHighlight = settings.brand_highlight || "Explore";
+    const brandPrefix = brandName.replace(brandHighlight, "");
+    const brandTagline = settings.brand_tagline || "Membangun koneksi antara pelancong dengan pesona autentik alam dan budaya Kalimantan Timur, Indonesia.";
+    const address = settings.address || "Jl. APT Pranoto No.88, Samarinda, Kalimantan Timur 75116";
+    const phone = settings.phone || "+62 811 555 1234";
+    const email = settings.email || "halo@kaltimexplore.id";
+    const copyrightText = settings.copyright_text || "Kaltim Explore Tour & Travel. All rights reserved.";
+    const copyrightTagline = settings.copyright_tagline || "Dibuat dengan ♥ di Borneo";
+
+    const navLinks = parseLinks(settings, "nav");
+    const supportLinks = parseLinks(settings, "support");
+
+    // Fallback navigation links
+    const defaultNavLinks = [
+        { label: "Tentang Kami", url: "#" },
+        { label: "Destinasi Populer", url: "#destinasi" },
+        { label: "Paket Wisata", url: "#" },
+        { label: "Blog & Artikel", url: "#berita" },
+        { label: "Galeri Kaltim", url: "#" },
+    ];
+
+    const defaultSupportLinks = [
+        { label: "FAQ", url: "#" },
+        { label: "Syarat & Ketentuan", url: "#" },
+        { label: "Kebijakan Privasi", url: "#" },
+        { label: "Panduan Wisatawan", url: "#" },
+    ];
+
+    const displayNavLinks = navLinks.length > 0 ? navLinks : defaultNavLinks;
+    const displaySupportLinks = supportLinks.length > 0 ? supportLinks : defaultSupportLinks;
 
     return (
         <footer className="bg-slate-900 text-slate-300 py-16 border-t border-slate-800">
@@ -35,10 +96,10 @@ export default async function Footer() {
                     {/* Brand */}
                     <div className="space-y-4">
                         <h3 className="text-2xl font-black text-white tracking-tighter">
-                            Kaltim<span className="text-emerald-500">Explore</span>
+                            {brandPrefix}<span className="text-emerald-500">{brandHighlight}</span>
                         </h3>
                         <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-                            Membangun koneksi antara pelancong dengan pesona autentik alam dan budaya Kalimantan Timur, Indonesia.
+                            {brandTagline}
                         </p>
                         <div className="flex gap-4 pt-4">
                             {socialMedia.map((social) => {
@@ -74,26 +135,23 @@ export default async function Footer() {
                         </div>
                     </div>
 
-                    {/* Links */}
+                    {/* Navigation Links */}
                     <div className="space-y-4">
                         <h4 className="text-white font-bold mb-6">Navigasi</h4>
                         <ul className="space-y-3 text-sm">
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Tentang Kami</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Destinasi Populer</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Paket Wisata</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Blog & Artikel</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Galeri Kaltim</a></li>
+                            {displayNavLinks.map((link, i) => (
+                                <li key={i}><a href={link.url} className="hover:text-emerald-400 transition-colors">{link.label}</a></li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Support */}
+                    {/* Support Links */}
                     <div className="space-y-4">
                         <h4 className="text-white font-bold mb-6">Pusat Bantuan</h4>
                         <ul className="space-y-3 text-sm">
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">FAQ</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Syarat & Ketentuan</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Kebijakan Privasi</a></li>
-                            <li><a href="#" className="hover:text-emerald-400 transition-colors">Panduan Wisatawan</a></li>
+                            {displaySupportLinks.map((link, i) => (
+                                <li key={i}><a href={link.url} className="hover:text-emerald-400 transition-colors">{link.label}</a></li>
+                            ))}
                         </ul>
                     </div>
 
@@ -103,15 +161,15 @@ export default async function Footer() {
                         <ul className="space-y-4 text-sm">
                             <li className="flex items-start gap-3">
                                 <MapPin className="w-5 h-5 text-emerald-500 shrink-0" />
-                                <span className="text-slate-400">Jl. APT Pranoto No.88, Samarinda, Kalimantan Timur 75116</span>
+                                <span className="text-slate-400">{address}</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
-                                <span className="text-slate-400">+62 811 555 1234</span>
+                                <span className="text-slate-400">{phone}</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
-                                <span className="text-slate-400">halo@kaltimexplore.id</span>
+                                <span className="text-slate-400">{email}</span>
                             </li>
                         </ul>
                     </div>
@@ -119,9 +177,9 @@ export default async function Footer() {
                 </div>
 
                 <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-                    <p>&copy; {new Date().getFullYear()} Kaltim Explore Tour & Travel. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} {copyrightText}</p>
                     <p className="flex items-center gap-1">
-                        Dibuat dengan <span className="text-red-500">♥</span> di Borneo
+                        {copyrightTagline}
                     </p>
                 </div>
             </div>

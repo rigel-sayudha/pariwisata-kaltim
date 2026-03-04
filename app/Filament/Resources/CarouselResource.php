@@ -25,39 +25,37 @@ class CarouselResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Wizard::make([
-                    Forms\Components\Wizard\Step::make('Informasi Teks')
-                        ->schema([
-                            Forms\Components\TextInput::make('title')
-                                ->label('Judul Utama')
-                                ->required()
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('subtitle')
-                                ->label('Sub Judul')
-                                ->maxLength(255),
-                            Forms\Components\Textarea::make('description')
-                                ->label('Deskripsi Pendek')
-                                ->maxLength(65535)
-                                ->columnSpanFull(),
-                            Forms\Components\TextInput::make('location')
-                                ->label('Lokasi Disorot')
-                                ->maxLength(255),
-                        ])->columns(2),
-                        
-                    Forms\Components\Wizard\Step::make('Visual Utama')
-                        ->schema([
-                            Forms\Components\FileUpload::make('image')
-                                ->label('Gambar Background')
-                                ->image()
-                                ->required()
-                                ->directory('carousels')
-                                ->columnSpanFull(),
-                            Forms\Components\Toggle::make('is_active')
-                                ->label('Aktifkan Banner Ini')
-                                ->required()
-                                ->default(true),
-                        ])->columns(2),
-                ])->columnSpanFull()
+                Forms\Components\Section::make('Informasi Teks')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Judul Utama')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('subtitle')
+                            ->label('Sub Judul')
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Deskripsi Pendek')
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('location')
+                            ->label('Lokasi Disorot')
+                            ->maxLength(255),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Visual Utama')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Gambar Background')
+                            ->image()
+                            ->required()
+                            ->directory('carousels')
+                            ->columnSpanFull(),
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Aktifkan Banner Ini')
+                            ->required()
+                            ->default(true),
+                    ])->columns(2),
             ]);
     }
 
@@ -87,15 +85,8 @@ class CarouselResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalSubmitAction(false)
-                    ->modalCancelAction(false),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -110,6 +101,8 @@ class CarouselResource extends Resource
     {
         return [
             'index' => Pages\ListCarousels::route('/'),
+            'create' => Pages\CreateCarousel::route('/create'),
+            'edit' => Pages\EditCarousel::route('/{record}/edit'),
         ];
     }
 }

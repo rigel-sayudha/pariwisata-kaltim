@@ -104,14 +104,8 @@ class TourBookingResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalCancelAction(false),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -126,6 +120,8 @@ class TourBookingResource extends Resource
     {
         return [
             'index' => Pages\ListTourBookings::route('/'),
+            'create' => Pages\CreateTourBooking::route('/create'),
+            'edit' => Pages\EditTourBooking::route('/{record}/edit'),
         ];
     }
 }

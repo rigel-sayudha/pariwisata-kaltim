@@ -25,16 +25,34 @@ class DestinationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('location')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->required()
-                    ->directory('destinations'),
+                Forms\Components\Section::make('Informasi Destinasi')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('location')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('category')
+                            ->label('Kategori')
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('short_description')
+                            ->label('Deskripsi Singkat')
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Visual & Status')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->image()
+                            ->required()
+                            ->directory('destinations')
+                            ->columnSpanFull(),
+                        Forms\Components\Toggle::make('is_featured')
+                            ->label('Tampilkan sebagai Unggulan')
+                            ->default(false),
+                    ]),
             ]);
     }
 
@@ -69,15 +87,8 @@ class DestinationResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalSubmitAction(false)
-                    ->modalCancelAction(false),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -92,6 +103,8 @@ class DestinationResource extends Resource
     {
         return [
             'index' => Pages\ListDestinations::route('/'),
+            'create' => Pages\CreateDestination::route('/create'),
+            'edit' => Pages\EditDestination::route('/{record}/edit'),
         ];
     }
 }

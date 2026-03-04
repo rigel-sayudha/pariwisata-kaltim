@@ -4,16 +4,9 @@ namespace App\Filament\Resources\ContactMessageResource\Pages;
 
 use App\Filament\Resources\ContactMessageResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\CreateRecord;
 
-class ListContactMessages extends ListRecords
+class CreateContactMessage extends CreateRecord
 {
     protected static string $resource = ContactMessageResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
 }

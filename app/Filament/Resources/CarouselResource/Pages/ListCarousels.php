@@ -13,9 +13,7 @@ class ListCarousels extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->modalSubmitAction(false)
-                ->modalCancelAction(false),
+            Actions\CreateAction::make(),
         ];
     }
 }

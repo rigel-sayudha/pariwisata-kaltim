@@ -26,55 +26,53 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Wizard::make([
-                    Forms\Components\Wizard\Step::make('Penulisan')
-                        ->schema([
-                            Forms\Components\TextInput::make('title')
-                                ->label('Judul Berita')
-                                ->required()
-                                ->maxLength(255)
-                                ->live(onBlur: true)
-                                ->afterStateUpdated(fn (string $context, $state, callable $set) => $context === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
-                            Forms\Components\TextInput::make('slug')
-                                ->required()
-                                ->maxLength(255)
-                                ->unique(News::class, 'slug', ignoreRecord: true),
-                            Forms\Components\TextInput::make('category')
-                                ->label('Kategori')
-                                ->maxLength(255),
-                            Forms\Components\TextInput::make('author')
-                                ->label('Penulis Utama')
-                                ->default('Admin')
-                                ->maxLength(255),
-                        ])->columns(2),
-                        
-                    Forms\Components\Wizard\Step::make('Isi Berita')
-                        ->schema([
-                            Forms\Components\Textarea::make('excerpt')
-                                ->label('Kutipan Pendek')
-                                ->maxLength(65535)
-                                ->columnSpanFull(),
-                            Forms\Components\RichEditor::make('content')
-                                ->label('Konten Berita')
-                                ->required()
-                                ->columnSpanFull(),
-                        ]),
-                        
-                    Forms\Components\Wizard\Step::make('Visual & Publikasi')
-                        ->schema([
-                            Forms\Components\FileUpload::make('image')
-                                ->label('Thumbnail Utama')
-                                ->image()
-                                ->directory('news')
-                                ->columnSpanFull(),
-                            Forms\Components\DatePicker::make('published_at')
-                                ->label('Tanggal Tayang'),
-                            Forms\Components\Toggle::make('is_published')
-                                ->label('Terbitkan Langsung')
-                                ->required()
-                                ->default(true),
-                        ])->columns(2),
-                ])->columnSpanFull()
+                Forms\Components\Section::make('Penulisan')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Judul Berita')
+                            ->required()
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (string $context, $state, callable $set) => $context === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
+                        Forms\Components\TextInput::make('slug')
+                            ->required()
+                            ->maxLength(255)
+                            ->unique(News::class, 'slug', ignoreRecord: true),
+                        Forms\Components\TextInput::make('category')
+                            ->label('Kategori')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('author')
+                            ->label('Penulis Utama')
+                            ->default('Admin')
+                            ->maxLength(255),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Isi Berita')
+                    ->schema([
+                        Forms\Components\Textarea::make('excerpt')
+                            ->label('Kutipan Pendek')
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                        Forms\Components\RichEditor::make('content')
+                            ->label('Konten Berita')
+                            ->required()
+                            ->columnSpanFull(),
+                    ]),
+
+                Forms\Components\Section::make('Visual & Publikasi')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Thumbnail Utama')
+                            ->image()
+                            ->directory('news')
+                            ->columnSpanFull(),
+                        Forms\Components\DatePicker::make('published_at')
+                            ->label('Tanggal Tayang'),
+                        Forms\Components\Toggle::make('is_published')
+                            ->label('Terbitkan Langsung')
+                            ->required()
+                            ->default(true),
+                    ])->columns(2),
             ]);
     }
 
@@ -110,15 +108,8 @@ class NewsResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalSubmitAction(false)
-                    ->modalCancelAction(false),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -133,6 +124,8 @@ class NewsResource extends Resource
     {
         return [
             'index' => Pages\ListNews::route('/'),
+            'create' => Pages\CreateNews::route('/create'),
+            'edit' => Pages\EditNews::route('/{record}/edit'),
         ];
     }
 }

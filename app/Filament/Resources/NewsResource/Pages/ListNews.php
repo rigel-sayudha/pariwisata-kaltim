@@ -13,9 +13,7 @@ class ListNews extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->createAnother(false)
-                ->extraModalFooterAttributes(['style' => 'display: none;']),
+            Actions\CreateAction::make(),
         ];
     }
 }

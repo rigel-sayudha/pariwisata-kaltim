@@ -45,7 +45,6 @@ export default function ContactSection() {
 
     return (
         <section className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden" id="kontak">
-            {/* Background Decorations */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 dark:bg-slate-900 skew-x-12 translate-x-32 hidden lg:block -z-10" />
 
             <div className="container mx-auto px-4">
@@ -61,15 +60,9 @@ export default function ContactSection() {
                         </h2>
                         <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8">
                             Tim pusat bantuan wisata kami di Kaltim Explore akan menajamkan rencana perjalanan Anda ke timur Borneo.
-                            Silahkan hubungi kami melalui formulir di samping.
+                            Silahkan hubungi kami melalui form ini.
                         </p>
 
-                        <div className="p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
-                            <h4 className="font-bold text-slate-900 dark:text-white mb-2">Respon Cepat</h4>
-                            <p className="text-slate-600 dark:text-slate-400 text-sm">
-                                Kami biasanya membalas pesan Anda dalam 1x24 Jam hari kerja melalui Inbox Email Anda.
-                            </p>
-                        </div>
                     </div>
 
                     {/* Form Column */}

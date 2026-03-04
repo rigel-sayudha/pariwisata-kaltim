@@ -72,14 +72,8 @@ class SocialMediaResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalCancelAction(false),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -94,6 +88,8 @@ class SocialMediaResource extends Resource
     {
         return [
             'index' => Pages\ListSocialMedia::route('/'),
+            'create' => Pages\CreateSocialMedia::route('/create'),
+            'edit' => Pages\EditSocialMedia::route('/{record}/edit'),
         ];
     }
 }
