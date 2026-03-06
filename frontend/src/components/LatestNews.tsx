@@ -50,10 +50,10 @@ export default function LatestNews({ items }: { items: any }) {
                             Berita & Pengumuman <br className="hidden md:block" /> Pariwisata Kalimantan Timur
                         </h2>
                     </div>
-                    <button className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group">
+                    <Link href="/berita" className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group">
                         Lihat Semua Berita
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Content Grid */}

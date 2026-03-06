@@ -14,6 +14,14 @@ class ContactMessage extends Model
         'email',
         'subject',
         'message',
+        'session_token',
+        'reply',
+        'replied_at',
         'is_read',
+    ];
+
+    protected $casts = [
+        'replied_at' => 'datetime',
+        'is_read' => 'boolean',
     ];
 }

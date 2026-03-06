@@ -25,6 +25,8 @@ Route::get('/footer-settings', [FrontendController::class, 'footerSettings']);
 
 Route::post('/tour-bookings', [FrontendController::class, 'storeBooking']);
 Route::post('/contact-messages', [FrontendController::class, 'storeContact']);
+Route::get('/chat-reply/{sessionToken}', [FrontendController::class, 'getChatReply']);
+Route::post('/chat-reply/{id}', [FrontendController::class, 'sendReply']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

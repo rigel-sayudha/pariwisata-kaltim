@@ -20,37 +20,6 @@ const getImageUrl = (imagePath: string) => {
 };
 
 
-
-const defaultDestinations: DestinationItem[] = [
-    {
-        id: 1,
-        name: "Pulau Kakaban",
-        location: "Kepulauan Derawan",
-        short_description: "Berenang bersama ubur-ubur langka tanpa sengat di danau purba.",
-        image: "https://images.unsplash.com/photo-1544480843-0e42a96b7978?q=80&w=800&auto=format&fit=crop",
-        category: "Pulau",
-        rating: 4.8
-    },
-    {
-        id: 2,
-        name: "Labuan Cermin",
-        location: "Biduk-Biduk",
-        short_description: "Pesona danau dua rasa, air tawar di permukaan dan air asin di dasar, sebening kaca.",
-        image: "https://images.unsplash.com/photo-1518331822268-6d24de3bc5dd?q=80&w=800&auto=format&fit=crop",
-        category: "Danau",
-        rating: 4.9
-    },
-    {
-        id: 3,
-        name: "Desa Budaya Pampang",
-        location: "Samarinda",
-        short_description: "Menyaksikan langsung kehidupan dan kebudayaan eksotis Suku Dayak Kenyah.",
-        image: "https://images.unsplash.com/photo-1589133464871-2edb95fbb06e?q=80&w=800&auto=format&fit=crop",
-        category: "Budaya",
-        rating: 4.7
-    }
-];
-
 export default function Destinations({ items }: { items: any }) {
     const getArrayItems = () => {
         if (!items) return [];

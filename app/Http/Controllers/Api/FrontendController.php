@@ -82,16 +82,34 @@ class FrontendController extends Controller
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+            'session_token' => 'nullable|string|max:100',
         ]);
 
         $contact = ContactMessage::create($validated);
 
         Notification::make()
-            ->title('Pesan Kontak Baru')
-            ->body("Pesan baru dari {$contact->name} dengan subjek: {$contact->subject}.")
+            ->title('Pesan Chat Baru')
+            ->body("Pesan baru dari {$contact->name}: {$contact->message}")
             ->info()
             ->sendToDatabase(User::all());
 
         return response()->json(['message' => 'Pesan berhasil dikirim', 'data' => $contact], 201);
+    }
+
+    public function getChatReply(string $sessionToken)
+    {
+        $message = ContactMessage::where('session_token', $sessionToken)
+            ->whereNotNull('reply')
+            ->latest('replied_at')
+            ->first();
+
+        if (!$message) {
+            return response()->json(['reply' => null]);
+        }
+
+        return response()->json([
+            'reply' => $message->reply,
+            'replied_at' => $message->replied_at,
+        ]);
     }
 }
