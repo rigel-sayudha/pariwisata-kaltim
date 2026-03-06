@@ -63,8 +63,7 @@ class DestinationResource extends Resource
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Foto'),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category')
@@ -72,15 +71,12 @@ class DestinationResource extends Resource
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('rating')
-                    ->numeric()
-                    ->sortable(),
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

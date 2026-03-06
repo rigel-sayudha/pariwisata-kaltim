@@ -13,7 +13,7 @@ interface FooterSettings {
 
 async function getSocialMedia() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/social-media", { next: { revalidate: 3600 } });
+        const res = await fetch("http://127.0.0.1:8000/api/social-media", { next: { revalidate: 30 } });
         if (!res.ok) return [];
         return res.json() as Promise<SocialMediaItem[]>;
     } catch (e) {
@@ -23,7 +23,7 @@ async function getSocialMedia() {
 
 async function getFooterSettings(): Promise<FooterSettings> {
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/footer-settings", { next: { revalidate: 3600 } });
+        const res = await fetch("http://127.0.0.1:8000/api/footer-settings", { next: { revalidate: 30 } });
         if (!res.ok) return {};
         return res.json() as Promise<FooterSettings>;
     } catch (e) {

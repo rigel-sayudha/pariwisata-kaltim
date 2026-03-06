@@ -54,28 +54,25 @@ class ContactMessageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('subject')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_read')
                     ->label('Dibaca')
-                    ->boolean()
-                    ->sortable(),
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dikirim Pada')
-                    ->dateTime()
-                    ->sortable(),
+                    ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->url(fn ($record) => ContactMessageResource::getUrl('view', ['record' => $record])),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);
@@ -93,6 +90,7 @@ class ContactMessageResource extends Resource
         return [
             'index' => Pages\ListContactMessages::route('/'),
             'create' => Pages\CreateContactMessage::route('/create'),
+            'view' => Pages\ViewContactMessage::route('/{record}'),
             'edit' => Pages\EditContactMessage::route('/{record}/edit'),
         ];
     }

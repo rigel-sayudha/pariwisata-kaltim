@@ -1,5 +1,5 @@
 import { Calendar, ArrowRight, User } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 
 interface NewsItem {
     id: number;
@@ -24,38 +24,6 @@ const formatDate = (dateString: string) => {
     return new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
 };
 
-const defaultNewsItems: NewsItem[] = [
-    {
-        id: 1,
-        title: "Festival Derawan 2026 Segera Digelar, Hadirkan Budaya Pesisir",
-        excerpt: "Pemerintah Provinsi Kalimantan Timur bersiap menyelenggarakan Festival Derawan tahunan dengan menampilkan parade perahu hias dan tarian pesisir.",
-        published_at: "2026-03-12T00:00:00Z",
-        author: "Dinas Pariwisata Kaltim",
-        image: "https://images.unsplash.com/photo-1544480843-0e42a96b7978?q=80&w=600&auto=format&fit=crop",
-        category: "Festival",
-        slug: "festival-derawan-2026-segera-digelar",
-    },
-    {
-        id: 2,
-        title: "Penetapan Kuota Kunjungan Harian Labuan Cermin Demi Konservasi",
-        excerpt: "Untuk menjaga kelestarian ekosistem danau dua rasa, mulai bulan depan akan diberlakukan pembatasan jumlah pengunjung harian.",
-        published_at: "2026-03-10T00:00:00Z",
-        author: "Humas Pemprov",
-        image: "https://images.unsplash.com/photo-1518331822268-6d24de3bc5dd?q=80&w=600&auto=format&fit=crop",
-        category: "Konservasi",
-        slug: "penetapan-kuota-kunjungan-harian-labuan-cermin",
-    },
-    {
-        id: 3,
-        title: "Rute Baru Penerbangan Langsung ke Berau Dibuka April Mendatang",
-        excerpt: "Akses wisatawan menuju Kepulauan Derawan semakin mudah dengan dibukanya rute penerbangan langsung dari Jakarta ke Bandara Kalimarau Berau.",
-        published_at: "2026-03-08T00:00:00Z",
-        author: "Info Transportasi",
-        image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop",
-        category: "Transportasi",
-        slug: "rute-baru-penerbangan-langsung-ke-berau",
-    }
-];
 
 export default function LatestNews({ items }: { items: any }) {
     const getArrayItems = () => {
@@ -91,16 +59,16 @@ export default function LatestNews({ items }: { items: any }) {
                 {/* Content Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayItems.map((news: NewsItem) => (
-                        <article
+                        <Link
                             key={news.id}
-                            className="group bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-300 border border-slate-100 dark:border-slate-800"
+                            href={`/berita/${news.slug}`}
+                            className="group bg-slate-50 dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-300 border border-slate-100 dark:border-slate-800 block"
                         >
                             <div className="relative h-56 overflow-hidden">
-                                <Image
+                                <img
                                     src={getImageUrl(news.image)}
                                     alt={news.title}
-                                    fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 {news.category && (
                                     <div className="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
@@ -129,12 +97,12 @@ export default function LatestNews({ items }: { items: any }) {
                                     {news.excerpt}
                                 </p>
 
-                                <button className="text-sm font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 group/btn">
+                                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 group/btn">
                                     Baca Selengkapnya
                                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                </button>
+                                </span>
                             </div>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             </div>

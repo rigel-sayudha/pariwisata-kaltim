@@ -76,21 +76,20 @@ class FooterSettingResource extends Resource
                     ->limit(50)
                     ->searchable(),
 
-                Tables\Columns\BadgeColumn::make('group')
+                Tables\Columns\TextColumn::make('group')
                     ->label('Grup')
-                    ->colors([
-                        'success' => 'brand',
-                        'info' => 'contact',
-                        'warning' => 'navigation',
-                        'primary' => 'support',
-                        'gray' => 'general',
-                    ])
-                    ->sortable(),
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'brand' => 'success',
+                        'contact' => 'info',
+                        'navigation' => 'warning',
+                        'support' => 'primary',
+                        default => 'gray',
+                    }),
 
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Terakhir Diubah')
-                    ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->dateTime('d M Y H:i'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('group')

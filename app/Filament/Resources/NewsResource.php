@@ -84,24 +84,20 @@ class NewsResource extends Resource
                     ->label('Thumbnail'),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
-                    ->sortable()
                     ->limit(30),
                 Tables\Columns\TextColumn::make('category')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
-                    ->date()
-                    ->sortable(),
+                    ->date(),
                 Tables\Columns\IconColumn::make('is_published')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

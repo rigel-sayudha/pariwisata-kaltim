@@ -30,34 +30,20 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('KaltimExplore')
             ->databaseNotifications()
+            ->databaseNotificationsPolling('30s')
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->renderHook(
-                'panels::head.end',
-                fn (): HtmlString => new HtmlString('
-                    <style>
-                        /* Fix: Prevent stuck Livewire/Alpine loading overlay from blocking interaction */
-                        .fi-modal-close-overlay,
-                        [x-show="isLoading"],
-                        div[wire\:loading] {
-                            opacity: 0 !important;
-                            pointer-events: none !important;
-                            z-index: -1 !important;
-                        }
-                    </style>
-                '),
-            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-            ])
+            // ->widgets([
+            //     Widgets\AccountWidget::class,
+            //     Widgets\FilamentInfoWidget::class,
+            // ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -71,6 +57,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->plugin(
+                \Saade\FilamentFullCalendar\FilamentFullCalendarPlugin::make()
+            );
     }
 }

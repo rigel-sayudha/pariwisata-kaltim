@@ -69,18 +69,18 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 transition-all"
+                        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50"
                     />
 
                     {/* Modal Box */}
-                    <div className="fixed inset-0 z-50 overflow-y-auto w-full">
+                    <div className="fixed inset-0 overflow-y-auto w-full pointer-events-none" style={{ zIndex: 60 }}>
                         <div className="flex min-h-full items-center justify-center p-4">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                                 transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-                                className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col"
+                                className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl relative overflow-hidden flex flex-col pointer-events-auto"
                             >
                                 {/* Modal Header */}
                                 <div className="px-6 md:px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-10">
@@ -126,7 +126,7 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                                                         required
                                                         value={formData.name}
                                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all dark:text-white outline-none"
+                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-slate-900 dark:text-white outline-none"
                                                         placeholder="John Doe"
                                                     />
                                                 </div>
@@ -138,7 +138,7 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                                                         required
                                                         value={formData.email}
                                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all dark:text-white outline-none"
+                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-slate-900 dark:text-white outline-none"
                                                         placeholder="john@example.com"
                                                     />
                                                 </div>
@@ -153,7 +153,7 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                                                         required
                                                         value={formData.phone}
                                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all dark:text-white outline-none"
+                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-slate-900 dark:text-white outline-none"
                                                         placeholder="0812xxxxxx"
                                                     />
                                                 </div>
@@ -166,7 +166,7 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                                                         required
                                                         value={formData.participants}
                                                         onChange={(e) => setFormData({ ...formData, participants: parseInt(e.target.value) || 1 })}
-                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all dark:text-white outline-none"
+                                                        className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-slate-900 dark:text-white outline-none"
                                                     />
                                                 </div>
                                             </div>
@@ -179,7 +179,7 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                                                     required
                                                     value={formData.date}
                                                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all dark:text-white outline-none"
+                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-slate-900 dark:text-white outline-none"
                                                 />
                                             </div>
 
@@ -190,7 +190,7 @@ export default function TourBookingModal({ isOpen, onClose }: TourBookingModalPr
                                                     rows={3}
                                                     value={formData.message}
                                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all resize-none dark:text-white outline-none"
+                                                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all resize-none text-slate-900 dark:text-white outline-none"
                                                     placeholder="Minta penjemputan di bandara Sepinggan / alergi makanan..."
                                                 />
                                             </div>

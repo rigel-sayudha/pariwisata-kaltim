@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Waves, Trees, Sun } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface DestinationItem {
     id: number;
@@ -15,25 +14,12 @@ interface DestinationItem {
 }
 
 const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '';
+    if (!imagePath) return 'https://images.unsplash.com/photo-1544480843-0e42a96b7978?q=80&w=800&auto=format&fit=crop';
     if (imagePath.startsWith('http')) return imagePath;
-    return `http://127.0.0.1:8000/storage/${imagePath}`;
+    return `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'}/storage/${imagePath}`;
 };
 
-const defaultColors = [
-    "from-blue-400 to-cyan-500",
-    "from-emerald-400 to-teal-500",
-    "from-amber-400 to-orange-500",
-    "from-indigo-400 to-violet-500",
-    "from-rose-400 to-pink-500",
-    "from-fuchsia-400 to-purple-500"
-];
 
-const defaultIcons = [
-    <Waves className="w-5 h-5" key="waves" />,
-    <Sun className="w-5 h-5" key="sun" />,
-    <Trees className="w-5 h-5" key="trees" />
-];
 
 const defaultDestinations: DestinationItem[] = [
     {
@@ -114,8 +100,6 @@ export default function Destinations({ items }: { items: any }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {displayItems.map((dest: DestinationItem, i: number) => {
-                        const iconIndex = i % defaultIcons.length;
-                        const colorIndex = i % defaultColors.length;
 
                         return (
                             <motion.div
@@ -129,15 +113,11 @@ export default function Destinations({ items }: { items: any }) {
                             >
                                 <div className="relative h-72 overflow-hidden">
                                     <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
-                                    <Image
+                                    <img
                                         src={getImageUrl(dest.image)}
                                         alt={dest.name}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className={`absolute top-4 right-4 z-20 w-10 h-10 rounded-full flex items-center justify-center text-white bg-gradient-to-br ${defaultColors[colorIndex]} shadow-lg`}>
-                                        {defaultIcons[iconIndex]}
-                                    </div>
                                 </div>
 
                                 {/* Content */}
