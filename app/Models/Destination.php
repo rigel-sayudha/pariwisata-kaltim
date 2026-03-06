@@ -11,6 +11,7 @@ class Destination extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'location',
         'rating',
         'review_count',
@@ -18,5 +19,21 @@ class Destination extends Model
         'category',
         'short_description',
         'is_featured',
+        'price',
+        'duration',
+        'group_size',
+        'languages',
+        'description',
+        'includes',
+        'excludes',
+        'what_to_expect',
+        'itinerary',
+    ];
+
+    protected $casts = [
+        'includes' => 'array',
+        'excludes' => 'array',
+        'what_to_expect' => 'array',
+        'itinerary' => 'array',
     ];
 }

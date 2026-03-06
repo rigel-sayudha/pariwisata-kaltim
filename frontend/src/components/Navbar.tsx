@@ -12,10 +12,10 @@ export default function Navbar() {
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
     const navLinks = [
-        { name: "Beranda", href: "#" },
-        { name: "Destinasi", href: "#destinasi" },
-        { name: "Berita Terbaru", href: "#berita" },
-        { name: "Kontak", href: "#kontak" },
+        { name: "Beranda", href: "/#" },
+        { name: "Destinasi", href: "/#destinasi" },
+        { name: "Berita Terbaru", href: "/#berita" },
+        { name: "Kontak", href: "/#kontak" },
     ];
 
     return (

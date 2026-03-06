@@ -29,6 +29,12 @@ class FrontendController extends Controller
         return response()->json($destinations);
     }
 
+    public function destinationDetail($slug)
+    {
+        $destination = Destination::where('slug', $slug)->firstOrFail();
+        return response()->json($destination);
+    }
+
     public function news()
     {
         $news = News::where('is_published', true)->orderBy('published_at', 'desc')->get();

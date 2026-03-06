@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 interface DestinationItem {
     id: number;
     name: string;
+    slug: string;
     location: string;
     category: string;
     short_description: string;
@@ -80,41 +82,44 @@ export default function Destinations({ items }: { items: any }) {
                                 whileHover={{ y: -10 }}
                                 className="group relative rounded-3xl overflow-hidden bg-white dark:bg-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none"
                             >
-                                <div className="relative h-72 overflow-hidden">
-                                    <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
-                                    <img
-                                        src={getImageUrl(dest.image)}
-                                        alt={dest.name}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                </div>
+                                <Link href={`/destinasi/${dest.slug}`} className="block h-full cursor-pointer">
+                                    <div className="relative h-72 overflow-hidden">
+                                        <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10" />
+                                        <img
+                                            src={getImageUrl(dest.image)}
+                                            alt={dest.name}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    </div>
 
-                                {/* Content */}
-                                <div className="p-8 relative">
-                                    <div className="absolute top-0 right-10 -translate-y-1/2 w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl rotate-45 z-10" />
-                                    <div className="relative z-20">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-                                                {dest.location}
+                                    {/* Content */}
+                                    <div className="p-8 relative">
+                                        <div className="absolute top-0 right-10 -translate-y-1/2 w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl rotate-45 z-10" />
+                                        <div className="relative z-20">
+                                            <div className="flex justify-between items-start mb-2">
+                                                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                                                    {dest.location}
+                                                </p>
+                                                {dest.rating > 0 && (
+                                                    <div className="flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 px-2 py-0.5 rounded text-xs font-bold">
+                                                        ★ {dest.rating}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                                                {dest.name}
+                                            </h3>
+                                            <p className="text-slate-600 dark:text-slate-400 mb-6 line-clamp-2">
+                                                {dest.short_description || dest.description || 'Destinasi wisata unggulan Kalimantan Timur.'}
                                             </p>
-                                            {dest.rating > 0 && (
-                                                <div className="flex items-center gap-1 bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 px-2 py-0.5 rounded text-xs font-bold">
-                                                    ★ {dest.rating}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
-                                            {dest.name}
-                                        </h3>
-                                        <p className="text-slate-600 dark:text-slate-400 mb-6 line-clamp-2">
-                                            {dest.short_description || dest.description || 'Destinasi wisata unggulan Kalimantan Timur.'}
-                                        </p>
-                                        <div className="flex items-center text-sm font-medium text-slate-900 dark:text-white group/btn cursor-pointer">
-                                            Pelajari selengkapnya
-                                            <ArrowRight className="w-4 h-4 ml-2 text-emerald-500 group-hover/btn:translate-x-2 transition-transform" />
+
+                                            <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold mb-4">
+                                                <span>Jelajahi Sekarang</span>
+                                                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </motion.div>
                         );
                     })}

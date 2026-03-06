@@ -29,6 +29,16 @@ class DestinationResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
+                                if ($operation === 'create' || $operation === 'edit') {
+                                    $set('slug', \Illuminate\Support\Str::slug($state));
+                                }
+                            }),
+                        Forms\Components\TextInput::make('slug')
+                            ->required()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(255),
                         Forms\Components\TextInput::make('location')
                             ->required()
@@ -39,6 +49,65 @@ class DestinationResource extends Resource
                         Forms\Components\Textarea::make('short_description')
                             ->label('Deskripsi Singkat')
                             ->maxLength(65535)
+                            ->columnSpanFull(),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Informasi Paket Tour')
+                    ->schema([
+                        Forms\Components\TextInput::make('price')
+                            ->label('Harga Paket (Rp)')
+                            ->numeric()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('duration')
+                            ->label('Durasi Paket')
+                            ->placeholder('Contoh: 4 Hari')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('group_size')
+                            ->label('Ukuran Grup')
+                            ->placeholder('Contoh: Maksimal 12 orang')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('languages')
+                            ->label('Bahasa yang Digunakan')
+                            ->placeholder('Contoh: Indonesia, English')
+                            ->maxLength(255),
+                        Forms\Components\RichEditor::make('description')
+                            ->label('Overview / Deskripsi Lengkap')
+                            ->columnSpanFull(),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Fasilitas & Ekspektasi')
+                    ->collapsible()
+                    ->collapsed()
+                    ->schema([
+                        Forms\Components\Repeater::make('includes')
+                            ->label('Price Includes (Termasuk)')
+                            ->simple(
+                                Forms\Components\TextInput::make('item')->required(),
+                            )
+                            ->columnSpan(1),
+                        Forms\Components\Repeater::make('excludes')
+                            ->label('Price Excludes (Tidak Termasuk)')
+                            ->simple(
+                                Forms\Components\TextInput::make('item')->required(),
+                            )
+                            ->columnSpan(1),
+                        Forms\Components\Repeater::make('what_to_expect')
+                            ->label('What to Expect (Ekspektasi/Poin Penting)')
+                            ->simple(
+                                Forms\Components\TextInput::make('item')->required(),
+                            )
+                            ->columnSpanFull(),
+                        Forms\Components\Repeater::make('itinerary')
+                            ->label('Itinerary Perjalanan')
+                            ->schema([
+                                Forms\Components\TextInput::make('day')
+                                    ->label('Judul / Hari')
+                                    ->placeholder('Contoh: Hari 1 - Kedatangan')
+                                    ->required(),
+                                Forms\Components\Textarea::make('content')
+                                    ->label('Aktivitas')
+                                    ->required(),
+                            ])
                             ->columnSpanFull(),
                     ])->columns(2),
 

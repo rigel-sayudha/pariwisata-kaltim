@@ -17,7 +17,7 @@ async function getCarousels() {
 
 async function getDestinations() {
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/destinations", { next: { revalidate: 10 } });
+    const res = await fetch("http://127.0.0.1:8000/api/destinations", { cache: "no-store" });
     if (!res.ok) return [];
     return res.json();
   } catch (e) {
