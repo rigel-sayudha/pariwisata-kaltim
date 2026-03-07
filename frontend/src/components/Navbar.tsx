@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import TourBookingModal from "./TourBookingModal";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -39,6 +40,7 @@ export default function Navbar() {
                                     {link.name}
                                 </Link>
                             ))}
+                            <ThemeToggle />
                             <button
                                 onClick={() => setIsBookingModalOpen(true)}
                                 className="px-6 py-2.5 text-sm font-semibold text-white bg-slate-900 dark:bg-emerald-600 rounded-full hover:bg-slate-800 dark:hover:bg-emerald-500 transition-colors"
@@ -48,7 +50,8 @@ export default function Navbar() {
                         </div>
 
                         {/* Mobile Toggle */}
-                        <div className="md:hidden flex items-center">
+                        <div className="md:hidden flex items-center gap-4">
+                            <ThemeToggle />
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
                                 className="text-slate-700 dark:text-slate-300 focus:outline-none"

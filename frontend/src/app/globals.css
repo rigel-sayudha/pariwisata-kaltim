@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-background: #f8fafc;
@@ -11,11 +12,10 @@
   /* Sky / Ocean for water */
 }
 
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: #0f172a;
-    --color-foreground: #f8fafc;
-  }
+/* Dark Mode Colors */
+.dark {
+  --color-background: #0f172a;
+  --color-foreground: #f8fafc;
 }
 
 body {

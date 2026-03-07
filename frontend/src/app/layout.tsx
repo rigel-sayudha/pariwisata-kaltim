@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
-        {children}
-        <ChatWidget />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <ChatWidget />
+        </ThemeProvider>
       </body>
     </html>
   );
