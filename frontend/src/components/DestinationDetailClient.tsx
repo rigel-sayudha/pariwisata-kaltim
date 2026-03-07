@@ -110,7 +110,7 @@ export default function DestinationDetailClient({
                             <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: destination.description || destination.short_description || '' }} />
                             {!destination.short_description && (
                                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mt-4">
-                                    Pemandu kami siap memberikan Anda pelayanan terbaik selama berada di jantung Kalimantan. Jadikan liburan Anda lebih bermakna dan seru.
+                                    Jadikan liburan Anda lebih bermakna dan seru.
                                 </p>
                             )}
                         </section>
@@ -296,7 +296,7 @@ export default function DestinationDetailClient({
                             {related.map((item) => (
                                 <Link
                                     key={item.id}
-                                    href={`/destinasi/${item.id}`}
+                                    href={`/destinasi/${item.slug}`}
                                     className="group rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:-translate-y-2 transition-transform duration-300"
                                 >
                                     <div className="aspect-[4/3] relative overflow-hidden">

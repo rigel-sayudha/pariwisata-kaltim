@@ -13,6 +13,7 @@ interface DestinationItem {
     short_description: string;
     image: string;
     rating: number;
+    description?: string;
 }
 
 const getImageUrl = (imagePath: string) => {
@@ -32,7 +33,7 @@ export default function Destinations({ items }: { items: any }) {
     };
 
     const arrayItems = getArrayItems();
-    const displayItems = arrayItems.length > 0 ? arrayItems : defaultDestinations;
+    const displayItems = arrayItems.length > 0 ? arrayItems : [];
 
     return (
         <section id="destinasi" className="py-24 bg-slate-50 dark:bg-slate-900">
@@ -58,15 +59,17 @@ export default function Destinations({ items }: { items: any }) {
                         </motion.p>
                     </div>
 
-                    <motion.button
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="group flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
-                    >
-                        Lihat Semua Destinasi
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
+                    <Link href="/destinasi">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="group flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors cursor-pointer"
+                        >
+                            Lihat Semua Destinasi
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </motion.div>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

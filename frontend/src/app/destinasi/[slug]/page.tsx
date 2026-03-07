@@ -25,7 +25,6 @@ async function getRelatedDestinations(currentSlug: string) {
         });
         if (!res.ok) return [];
         const data = await res.json();
-        // Return 3 random destinations excluding the current one
         return data.filter((d: any) => d.slug?.toString() !== currentSlug).slice(0, 3);
     } catch {
         return [];
