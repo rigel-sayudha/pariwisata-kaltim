@@ -8,10 +8,10 @@ This is a web application designed to showcase tourism destinations, news, and b
 ## 📸 Captures
 
 ### User Pages
-![Frontend Home Capture](https://via.placeholder.com/800x400?text=Frontend+Home+View)
+![Frontend Home Capture](public/img/POSTER%20KALTIMEXPLORE.png)
 
 ### Admin Panel
-![Admin Dashboard Capture](https://via.placeholder.com/800x400?text=Admin+Dashboard+View)
+![Admin Dashboard Capture](public/img/DASHBOARD%20KALTIMEXPLORE.png)
 
 ---
 
