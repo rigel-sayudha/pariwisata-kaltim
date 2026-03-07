@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { ArrowRight, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface CarouselItem {
     id: number;
@@ -16,12 +17,15 @@ interface CarouselItem {
     description: string;
     image: string;
     location: string;
+    destination?: {
+        slug: string;
+    };
 }
 
 const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '';
+    if (!imagePath) return 'https://images.unsplash.com/photo-1544480843-0e42a96b7978?q=80&w=1920&auto=format&fit=crop';
     if (imagePath.startsWith('http')) return imagePath;
-    return `http://127.0.0.1:8000/storage/${imagePath}`;
+    return `${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'}/storage/${imagePath}`;
 };
 
 // const defaultSlides: CarouselItem[] = [
@@ -117,10 +121,10 @@ export default function CarouselHero({ items }: { items: any }) {
                                                     {slide.description}
                                                 </p>
 
-                                                <button className="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-full flex items-center gap-3 transition-all group/btn">
+                                                <Link href={slide.destination ? `/destinasi/${slide.destination.slug}` : '#'} className="inline-flex px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-full items-center gap-3 transition-all group/btn">
                                                     Jelajahi Sekarang
                                                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                                                </button>
+                                                </Link>
                                             </motion.div>
                                         </div>
                                     </div>

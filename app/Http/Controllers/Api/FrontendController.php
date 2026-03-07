@@ -19,7 +19,7 @@ class FrontendController extends Controller
 {
     public function carousels()
     {
-        $carousels = Carousel::where('is_active', true)->get();
+        $carousels = Carousel::with('destination')->where('is_active', true)->get();
         return response()->json($carousels);
     }
 

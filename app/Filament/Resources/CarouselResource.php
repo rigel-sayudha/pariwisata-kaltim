@@ -27,6 +27,24 @@ class CarouselResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Informasi Teks')
                     ->schema([
+                        Forms\Components\Select::make('destination_id')
+                            ->label('Pilih Destinasi (Auto-fill)')
+                            ->relationship('destination', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->live()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                if (!$state) return;
+                                $destination = \App\Models\Destination::find($state);
+                                if ($destination) {
+                                    $set('title', $destination->name);
+                                    $set('subtitle', 'Kategori: ' . $destination->category);
+                                    $set('description', $destination->short_description);
+                                    $set('location', $destination->location);
+                                    $set('image', $destination->image ? [$destination->image => $destination->image] : null);
+                                }
+                            })
+                            ->columnSpanFull(),
                         Forms\Components\TextInput::make('title')
                             ->label('Judul Utama')
                             ->required()

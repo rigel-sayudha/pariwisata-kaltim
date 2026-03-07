@@ -10,6 +10,7 @@ class Carousel extends Model
     use HasFactory;
 
     protected $fillable = [
+        'destination_id',
         'title',
         'subtitle',
         'description',
@@ -17,4 +18,9 @@ class Carousel extends Model
         'location',
         'is_active',
     ];
+
+    public function destination()
+    {
+        return $this->belongsTo(Destination::class);
+    }
 }
