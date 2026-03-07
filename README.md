@@ -15,9 +15,9 @@ This is a web application designed to showcase tourism destinations, news, and b
 
 ---
 
-## ✨ Fitur Utama (Key Features)
+##  Fitur Utama (Key Features)
 
-### 🎨 Frontend (Sisi Pengguna)
+###  Frontend (Sisi Pengguna)
 - Menggunakan Tailwind CSS v4 & animasi elegan dari Framer Motion dengan efek *Glassmorphism*.
 - Terintegrasi penuh dengan dukungan deteksi otomatis sistem menggunakan `next-themes`.
 - Rute URL menggunakan pendekatan *slug* (`/destinasi/[nama-destinasi]`).
@@ -25,7 +25,7 @@ This is a web application designed to showcase tourism destinations, news, and b
 - Banner *slider* utama yang secara dinamis menarik dan menampilkan data dari destinasi-destinasi unggulan.
 - Fitur kirim pesan yang memungkinkan pengunjung berinteraksi dan mendapatkan balasan dari pengelola secara semi real-time (*polling* token sesi).
 
-### ⚙️ Backend (Sisi Admin)
+###  Backend (Sisi Admin)
 - **Dasbor Manajemen Modern:** Dibangun cepat dan tangguh menggunakan Laravel Filament v3.
 - **Pembuatan Carousel Cerdas (Auto-fill):** Tambahkan banner baru hanya dengan mengeklik nama destinasi; foto, judul, dan deskripsi akan terisi otomatis.
 - **Kontrol Destinasi Mahir:** Dilengkapi dengan *Rich Text Editor* terintegrasi dan *Repeater builder* untuk menyusun *Itinerary* (Jadwal Perjalanan).
